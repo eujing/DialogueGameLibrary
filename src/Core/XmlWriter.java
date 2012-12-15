@@ -59,8 +59,8 @@ public class XmlWriter {
 		eResponse.appendChild (doc.createTextNode (node.type.toString ()));
 		eNode.appendChild (eResponse);
 		
-		if (node.children != null) {
-			for (DialogueNode child : node.children) {
+		if (node.childrenNodes != null) {
+			for (DialogueNode child : node.childrenNodes) {
 				RecurseWriteChild (child, eNode, doc);
 			}
 		}

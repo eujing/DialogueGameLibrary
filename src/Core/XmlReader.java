@@ -47,7 +47,7 @@ public class XmlReader {
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eTmp = (Element) nNode;
 				DialogueNode dNode = parseDialogueNode (eTmp);
-				parentNode.children.add(dNode);
+				parentNode.childrenNodes.add(dNode);
 				RecurseReadChildren(eTmp, dNode);
 			}
 		}
