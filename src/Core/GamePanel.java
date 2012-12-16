@@ -1,29 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Core;
 
-/**
- *
- * @author Owner
- */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class GamePanel extends javax.swing.JPanel {
-
-	/**
-	 * Creates new form GamePanel
-	 */
-	public int boundWidth;
-	public int boundHeight;
-
-	public GamePanel (DialogueNode dNode) {
+	public GamePanel (final DialogueNode dNode) {
 		initComponents ();
 		
 		this.lblName.setText (dNode.playerName);
 		this.lblText.setText (dNode.text);
 		this.lblType.setText (dNode.type.toString ());
-		this.boundWidth = this.getPreferredSize ().width;
-		this.boundHeight = this.getPreferredSize ().height;
+		
+		this.bRespond.addActionListener (new ActionListener () {
+			@Override
+			public void actionPerformed (ActionEvent e) {
+				new ResponseMenu (dNode, bRespond);
+			}
+		});
 	}
 
 	/**

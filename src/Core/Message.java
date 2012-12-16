@@ -20,7 +20,9 @@ public class Message implements Serializable {
 				return (Message) obj;
 			}
 		}
-		catch (Exception ex) {}
+		catch (Exception ex) {
+			Logger.logDebug (ex.getMessage ());
+		}
 		
 		return null;
 	}
