@@ -13,8 +13,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XmlReader {
+	private final MessageHandler msgHandler;
 
-	public static DialogueNode ReadTree (String fileName) {
+	public XmlReader (MessageHandler msgHandler) {
+		this.msgHandler = msgHandler;
+	}
+	
+	public DialogueNode ReadTree (String fileName) {
 		try {
 			File file = new File (fileName);
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance ().newDocumentBuilder ();
@@ -41,7 +46,7 @@ public class XmlReader {
 		return null;
 	}
 
-	private static void RecurseReadChildren (Element e, DialogueNode parentNode) {
+	private void RecurseReadChildren (Element e, DialogueNode parentNode) {
 		NodeList nList = e.getChildNodes ();
 
 		for (int i = 0; i < nList.getLength (); i++) {
@@ -55,13 +60,13 @@ public class XmlReader {
 		}
 	}
 
-	private static DialogueNode parseDialogueNode (Element e) {
+	private DialogueNode parseDialogueNode (Element e) {
 		int id = Integer.parseInt (getTagValue ("id", e));
 		String name = getTagValue ("name", e);
 		String text = getTagValue ("text", e);
 		Response type = Response.valueOf (getTagValue ("type", e));
 
-		return new DialogueNode (id, name, text, type);
+		return new DialogueNode (id, name, text, type, this.msgHandler);
 	}
 
 	private static String getTagValue (String tagName, Element e) {

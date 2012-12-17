@@ -7,7 +7,7 @@ public class Logger {
 	private static final boolean DEBUG = true;
 	
 	public static void log (String msg) {
-		System.out.println ("[" + Calendar.getInstance ().getTime ().toString () + "]" + msg);
+		System.out.println ("[" + Calendar.getInstance ().getTime ().toString () + "]\t" + msg);
 	}
 
 	public static void logDebug (String msg) {

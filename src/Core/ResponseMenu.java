@@ -38,9 +38,11 @@ public class ResponseMenu extends JPopupMenu {
 		this.bSubmit.addActionListener (new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
+				
 				if (lastResponse != null && starters.getSelectedIndex () != -1) {
 					String text = starters.getSelectedValue ().toString () + " " +  tfText.getText ();
-					
+					DialogueNode partialNode = dNode.newChild ("", text, lastResponse);
+					dNode.msgHandler.submitMessage (new Message ("sendResponse", "", partialNode));
 				}
 			}
 		});
