@@ -1,6 +1,6 @@
 package Core;
 
-import Core.ResponseHandler.Response;
+import Core.ResponseHandler.ResponseType;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -64,7 +64,7 @@ public class XmlReader {
 		int id = Integer.parseInt (getTagValue ("id", e));
 		String name = getTagValue ("name", e);
 		String text = getTagValue ("text", e);
-		Response type = Response.valueOf (getTagValue ("type", e));
+		ResponseType type = ResponseType.valueOf (getTagValue ("type", e));
 
 		return new DialogueNode (id, name, text, type, this.msgHandler);
 	}

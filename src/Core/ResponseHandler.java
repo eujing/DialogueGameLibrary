@@ -4,19 +4,20 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class ResponseHandler {
-	public enum Response {QUESTION, INFORMATION, CHALLENGE, AGREEMENT, SUPPORT};
+	public enum ResponseType {SEED, QUESTION, INFORMATION, CHALLENGE, AGREEMENT, SUPPORT};
 	
-	private Map <Response, Response[]> map = new EnumMap <> (Response.class);
+	private Map <ResponseType, ResponseType[]> map = new EnumMap <> (ResponseType.class);
 	
 	public ResponseHandler () {
-		map.put (Response.QUESTION, new Response[] {Response.INFORMATION, Response.CHALLENGE});
-		map.put (Response.INFORMATION, new Response[] {Response.QUESTION, Response.CHALLENGE, Response.AGREEMENT, Response.SUPPORT});
-		map.put (Response.CHALLENGE, new Response[] {Response.QUESTION, Response.AGREEMENT, Response.SUPPORT});
-		map.put (Response.AGREEMENT, new Response[] {Response.AGREEMENT});
-		map.put (Response.SUPPORT, new Response[] {Response.QUESTION, Response.CHALLENGE, Response.AGREEMENT});
+		map.put(ResponseType.SEED, new ResponseType[] {ResponseType.QUESTION});
+		map.put (ResponseType.QUESTION, new ResponseType[] {ResponseType.INFORMATION, ResponseType.CHALLENGE});
+		map.put (ResponseType.INFORMATION, new ResponseType[] {ResponseType.QUESTION, ResponseType.CHALLENGE, ResponseType.AGREEMENT, ResponseType.SUPPORT});
+		map.put (ResponseType.CHALLENGE, new ResponseType[] {ResponseType.QUESTION, ResponseType.AGREEMENT, ResponseType.SUPPORT});
+		map.put (ResponseType.AGREEMENT, new ResponseType[] {ResponseType.AGREEMENT});
+		map.put (ResponseType.SUPPORT, new ResponseType[] {ResponseType.QUESTION, ResponseType.CHALLENGE, ResponseType.AGREEMENT});
 	}
 	
-	public Response[] getResponses (Response type) {
+	public ResponseType[] getResponses (ResponseType type) {
 		return map.get (type);
 	}
 }

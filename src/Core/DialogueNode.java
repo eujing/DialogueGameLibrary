@@ -1,6 +1,6 @@
 package Core;
 
-import Core.ResponseHandler.Response;
+import Core.ResponseHandler.ResponseType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -13,14 +13,14 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 	public int parentId;
 	public String playerName;
 	public String text;
-	public Response type;
+	public ResponseType type;
 	public ArrayList<DialogueNode> childrenNodes;
 	
-	public DialogueNode (int parentId, String playerName, String text, Response type, MessageHandler msgHandler) {
+	public DialogueNode (int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
 		this (++count, parentId, playerName, text, type, msgHandler);
 	}
 	
-	public DialogueNode (int id, int parentId, String playerName, String text, Response type, MessageHandler msgHandler) {
+	public DialogueNode (int id, int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
 		this.msgHandler = msgHandler;
 		if (id > count) {
 			count = id;
@@ -37,7 +37,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 		return new GamePanel (this);
 	}
 	
-	public DialogueNode newChild (String playerName, String text, Response type) {
+	public DialogueNode newChild (String playerName, String text, ResponseType type) {
 		return new DialogueNode (this.id, playerName, text, type, this.msgHandler);
 	}
 	

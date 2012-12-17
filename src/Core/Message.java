@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
 
-	public String tag;
+	public MessageTag tag;
 	public String from;
 	public Object data;
 	
-	public Message (String tag, String from, Object data) {
+	public Message (MessageTag tag, String from, Object data) {
 		this.tag = tag;
 		this.from = from;
 		this.data = data;
