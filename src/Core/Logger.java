@@ -12,7 +12,7 @@ public class Logger {
 
 	public static void logDebug (String msg) {
 		if (DEBUG) {
-			log (msg);
+			log ("[DEBUG]\t" + msg);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package Core;
 
+import Resources.FileReader;
 import Core.ResponseHandler.Response;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -43,6 +44,7 @@ public class ResponseMenu extends JPopupMenu {
 					String text = starters.getSelectedValue ().toString () + " " +  tfText.getText ();
 					DialogueNode partialNode = dNode.newChild ("", text, lastResponse);
 					dNode.msgHandler.submitMessage (new Message ("sendResponse", "", partialNode));
+					
 				}
 			}
 		});
@@ -78,8 +80,8 @@ public class ResponseMenu extends JPopupMenu {
 			this.buttons[i].setPreferredSize (new Dimension (100, 25));
 
 			final DefaultListModel responseModel = new DefaultListModel ();
-			String dir = ".." + File.separatorChar + "Resources" + File.separatorChar + str.toLowerCase () + "_starters.txt";
-			for (String line : FileReader.getLines (ResponseHandler.class.getResourceAsStream (dir))) {
+			String dir = "/Resources/" + str.toLowerCase () + "_starters.txt";
+			for (String line : FileReader.getLines (this.getClass().getResourceAsStream (dir))) {
 				responseModel.addElement (line);
 			}
 
