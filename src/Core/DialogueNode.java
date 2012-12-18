@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class DialogueNode extends DefaultMutableTreeNode implements Comparable, Serializable {
 	private static final long serialVersionUID = 2241503899723137729L;
-	private static int count = 0;
+	public static int count = 1;
 	public transient MessageHandler msgHandler;
 	public int id;
 	public int parentId;
@@ -17,7 +17,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 	public ArrayList<DialogueNode> childrenNodes;
 	
 	public DialogueNode (int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
-		this (++count, parentId, playerName, text, type, msgHandler);
+		this (count, parentId, playerName, text, type, msgHandler);
 	}
 	
 	public DialogueNode (int id, int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
