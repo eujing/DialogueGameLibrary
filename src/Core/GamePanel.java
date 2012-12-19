@@ -5,9 +5,12 @@ import java.awt.event.ActionListener;
 
 public class GamePanel extends javax.swing.JPanel {
 
+	private ResponseMenu responseMenu;
+	
 	public GamePanel(final DialogueNode dNode) {
 		initComponents();
 
+		this.responseMenu = new ResponseMenu(dNode, bRespond);
 		lblName.setText(dNode.playerName);
 		lblText.setText(dNode.text);
 		lblType.setText(dNode.type.toString());
@@ -15,9 +18,13 @@ public class GamePanel extends javax.swing.JPanel {
 		this.bRespond.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ResponseMenu(dNode, bRespond);
+				responseMenu.showMenu ();
 			}
 		});
+	}
+	
+	public void setRespondEnabled (boolean enabled) {
+		this.bRespond.setEnabled (enabled);
 	}
 
 	/**

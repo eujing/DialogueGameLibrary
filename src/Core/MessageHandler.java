@@ -29,6 +29,7 @@ public class MessageHandler {
 	
 	public void submitSendingMessage (Message msg) {
 		synchronized (sendLock) {
+			Logger.logDebug("[Message sending]\t[" + msg.tag.toString() + "]\tfrom " + msg.from);
 			MessageListener msgListener = sendResponse.get (msg.tag);
 			if (msgListener != null) {
 				msgListener.messageReceived(msg);

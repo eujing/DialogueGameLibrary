@@ -17,6 +17,10 @@ import org.w3c.dom.Element;
 public class XmlWriter {
 
 	public static void WriteTree (String fileName, DialogueNode root) {
+		if (root == null) {
+			return;
+		}
+		
 		try {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance ().newDocumentBuilder ();
 			

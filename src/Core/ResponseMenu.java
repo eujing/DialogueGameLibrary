@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 public class ResponseMenu extends JPopupMenu {
 
+	private Component invoker;
 	private ResponseType lastResponse;
 	private JButton[] buttons;
 	private JList starters;
@@ -61,6 +62,7 @@ public class ResponseMenu extends JPopupMenu {
 	}
 
 	private void init(ResponseType type, Component invoker) {
+		this.invoker = invoker;
 		this.setLayout(new GridLayout(1, 3));
 		this.lastResponse = null;
 		this.starters = new JList();
@@ -75,8 +77,6 @@ public class ResponseMenu extends JPopupMenu {
 		this.add(buttonPanel);
 		this.add(startersPanel);
 		this.add(rightPanel);
-
-		this.show(invoker, 0, invoker.getHeight());
 	}
 
 	private void addWithinPanel(Container container, Component comp) {
@@ -104,10 +104,11 @@ public class ResponseMenu extends JPopupMenu {
 				responseModel.addElement(line);
 			}
 
+			final JButton b = this.buttons[i];
 			this.buttons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					lastResponse = response;
+					lastResponse = ResponseType.valueOf (b.getText ().toUpperCase ());
 					starters.setModel(responseModel);
 				}
 			});
@@ -135,5 +136,13 @@ public class ResponseMenu extends JPopupMenu {
 		this.addWithinPanel(rightPanel, this.bSubmit);
 
 		return rightPanel;
+	}
+	
+	public void showMenu () {
+		this.show(invoker, 0, invoker.getHeight());
+	}
+	
+	public void hideMenu () {
+		setVisible (false);
 	}
 }
