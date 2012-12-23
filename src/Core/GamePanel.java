@@ -2,9 +2,11 @@ package Core;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 
 public class GamePanel extends javax.swing.JPanel {
 
+	private static final String NO_AVATAR = "/Resources/noAvatar.jpg";
 	private ResponseMenu responseMenu;
 	
 	public GamePanel(final DialogueNode dNode) {
@@ -12,6 +14,13 @@ public class GamePanel extends javax.swing.JPanel {
 
 		this.responseMenu = new ResponseMenu(dNode, bRespond);
 		lblName.setText(dNode.playerName);
+		if (dNode.avatar == null) {
+			ImageIcon img = new ImageIcon (FileReader.getImage (this.getClass ().getResource (NO_AVATAR), 64, 64));
+			avatar.setIcon (img);
+		}
+		else {
+			avatar.setIcon (dNode.avatar);
+		}
 		taText.setText(dNode.text);
 		lblType.setText(dNode.type.toString());
 

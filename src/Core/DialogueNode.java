@@ -3,6 +3,7 @@ package Core;
 import Core.ResponseHandler.ResponseType;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class DialogueNode extends DefaultMutableTreeNode implements Comparable, Serializable {
@@ -15,6 +16,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 	public String text;
 	public ResponseType type;
 	public ArrayList<DialogueNode> childrenNodes;
+	public ImageIcon avatar;
 	
 	public DialogueNode (int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
 		this (count, parentId, playerName, text, type, msgHandler);
@@ -31,6 +33,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 		this.text = text;
 		this.type = type;
 		this.childrenNodes = new ArrayList <> ();
+		this.avatar = null;
 	}
 	
 	public GamePanel createGamePanel () {

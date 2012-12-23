@@ -1,7 +1,6 @@
 package Core;
 
 import Core.ResponseHandler.ResponseType;
-import Resources.FileReader;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
