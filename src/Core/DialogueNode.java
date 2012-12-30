@@ -49,5 +49,15 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 		DialogueNode o = (DialogueNode) obj;
 		return this.id - o.id;
 	}
+	
+	@Override
+	public String toString () {
+		return "[id=" + id + ", " +
+			   "parentId=" + parentId + ", " +
+			   "playerName=" + playerName + ", " +
+			   "text=" + text + ", " +
+			   "type=" + type + "]";
+			   
+	}
 }
 
