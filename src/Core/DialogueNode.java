@@ -17,6 +17,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 	public ResponseType type;
 	public ArrayList<DialogueNode> childrenNodes;
 	public ImageIcon avatar;
+	public boolean isMostRecent;
 	
 	public DialogueNode (int parentId, String playerName, String text, ResponseType type, MessageHandler msgHandler) {
 		this (count, parentId, playerName, text, type, msgHandler);
@@ -34,6 +35,7 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 		this.type = type;
 		this.childrenNodes = new ArrayList <> ();
 		this.avatar = null;
+		this.isMostRecent = false;
 	}
 	
 	public GamePanel createGamePanel () {
@@ -42,6 +44,10 @@ public class DialogueNode extends DefaultMutableTreeNode implements Comparable, 
 	
 	public DialogueNode newChild (String playerName, String text, ResponseType type) {
 		return new DialogueNode (this.id, playerName, text, type, this.msgHandler);
+	}
+	
+	public void setIsMostRecent (boolean b) {
+		this.isMostRecent = b;
 	}
 	
 	@Override

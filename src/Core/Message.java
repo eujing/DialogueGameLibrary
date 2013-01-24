@@ -21,7 +21,7 @@ public class Message implements Serializable {
 			}
 		}
 		catch (Exception ex) {
-			Logger.logDebug (ex.getMessage ());
+			Logger.logException ("Message::cast", ex);
 		}
 		
 		return null;

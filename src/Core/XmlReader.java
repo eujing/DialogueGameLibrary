@@ -13,24 +13,33 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XmlReader {
+
 	private final MessageHandler msgHandler;
 
 	public XmlReader (MessageHandler msgHandler) {
 		this.msgHandler = msgHandler;
 	}
-	
-	public DialogueNode ReadTree (String fileName) {
+
+	public boolean isDialogueNode (Node node) {
+		return node.getNodeType () == Node.ELEMENT_NODE && node.getNodeName ().equals ("node");
+	}
+
+	public DialogueNode ReadTreeRoot (String fileName) {
+		return ReadTreeRoot (new File (fileName));
+	}
+
+	public DialogueNode ReadTreeRoot (File file) {
 		try {
-			File file = new File (fileName);
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance ().newDocumentBuilder ();
 			Document doc = docBuilder.parse (file);
 			doc.getDocumentElement ().normalize ();
 
-			NodeList nList = doc.getChildNodes ();
+			NodeList nList = doc.getChildNodes ().item (0).getChildNodes ();
 			Node nNode = nList.item (0);
-			if (nNode.getNodeType () == Node.ELEMENT_NODE) {
+			if (isDialogueNode (nNode)) {
 				Element e = (Element) nNode;
-				DialogueNode rootNode = parseDialogueNode (e);
+				DialogueNode rootNode = parseDialogueNode (e, 0);
+				Logger.logDebug (rootNode.toString ());
 				RecurseReadChildren (e, rootNode);
 
 				return rootNode;
@@ -40,7 +49,7 @@ public class XmlReader {
 			}
 		}
 		catch (ParserConfigurationException | SAXException | IOException ex) {
-			Logger.logDebug (ex.getMessage ());
+			Logger.logException ("XmlReader::ReadTreeNode", ex);
 		}
 
 		return null;
@@ -51,27 +60,42 @@ public class XmlReader {
 
 		for (int i = 0; i < nList.getLength (); i++) {
 			Node nNode = nList.item (i);
-			if (nNode.getNodeType () == Node.ELEMENT_NODE) {
+			if (isDialogueNode (nNode)) {
 				Element eTmp = (Element) nNode;
-				DialogueNode dNode = parseDialogueNode (eTmp);
+				DialogueNode dNode = parseDialogueNode (eTmp, parentNode.id);
+				Logger.logDebug (dNode.toString ());
 				parentNode.childrenNodes.add (dNode);
 				RecurseReadChildren (eTmp, dNode);
 			}
 		}
 	}
 
-	private DialogueNode parseDialogueNode (Element e) {
+	private DialogueNode parseDialogueNode (Element e, int parentId) {
 		int id = Integer.parseInt (getTagValue ("id", e));
 		String name = getTagValue ("name", e);
 		String text = getTagValue ("text", e);
 		ResponseType type = ResponseType.valueOf (getTagValue ("type", e));
 
-		return new DialogueNode (id, name, text, type, this.msgHandler);
+		DialogueNode node = new DialogueNode (id, parentId, name, text, type, this.msgHandler);
+
+		return node;
 	}
 
 	private static String getTagValue (String tagName, Element e) {
-		NodeList nList = e.getElementsByTagName (tagName).item (0).getChildNodes ();
-		Node nValue = (Node) nList.item (0);
-		return nValue.getNodeValue ();
+		NodeList eList = e.getElementsByTagName (tagName);
+
+		try {
+			if (eList.item (0) != null) {
+				NodeList nList = eList.item (0).getChildNodes ();
+				Node nValue = (Node) nList.item (0);
+				String nodeValue = nValue.getNodeValue ();
+				return nodeValue;
+			}
+		}
+		catch (Exception ex) {
+			Logger.logException ("XmlReader::getTagValue", ex);
+		}
+
+		return null;
 	}
 }

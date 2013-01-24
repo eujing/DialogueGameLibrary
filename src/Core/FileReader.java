@@ -21,7 +21,7 @@ public class FileReader {
 			}
 		}
 		catch (Exception ex) {
-			Logger.logDebug (ex.getMessage ());
+			Logger.logException ("FileReader::getLines", ex);
 		}
 		
 		return lines;

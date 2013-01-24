@@ -11,5 +11,6 @@ public enum MessageTag {
 	START_GAME,
 	STOP_GAME,
 	CURRENT_TURN,
-	SKIP_TURN;
+	SKIP_TURN,
+	LOAD_TREE;
 }

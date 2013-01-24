@@ -16,7 +16,7 @@ public class MessageHandler {
 
 	public void submitReceivedMessage (Message msg) {
 		synchronized (receivelock) {
-			Logger.logDebug("[Message received]\t[" + msg.tag.toString() + "]\tfrom " + msg.from);
+			Logger.logDebug("[Message received] [" + msg.tag.toString() + "] from " + msg.from);
 			MessageListener msgListener = recResponse.get (msg.tag);
 			if (msgListener != null) {
 				msgListener.messageReceived(msg);
@@ -29,7 +29,7 @@ public class MessageHandler {
 	
 	public void submitSendingMessage (Message msg) {
 		synchronized (sendLock) {
-			Logger.logDebug("[Message sending]\t[" + msg.tag.toString() + "]\tfrom " + msg.from);
+			Logger.logDebug("[Message sending] [" + msg.tag.toString() + "] from " + msg.from);
 			MessageListener msgListener = sendResponse.get (msg.tag);
 			if (msgListener != null) {
 				msgListener.messageReceived(msg);
