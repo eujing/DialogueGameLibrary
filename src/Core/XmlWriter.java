@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 
 public class XmlWriter {
 
-	public static void WriteTree (String fileName, DialogueNode root) {
+	public static void WriteTree (File file, DialogueNode root) {
 		if (root == null) {
 			return;
 		}
@@ -32,7 +32,7 @@ public class XmlWriter {
 
 			Transformer transformer = TransformerFactory.newInstance ().newTransformer ();
 			DOMSource source = new DOMSource (doc);
-			StreamResult result = new StreamResult (new File (fileName));
+			StreamResult result = new StreamResult (file);
 
 			transformer.transform (source, result);
 		}

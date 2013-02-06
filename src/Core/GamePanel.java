@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 public class GamePanel extends javax.swing.JPanel {
 
-	private static final String NO_AVATAR = "/Resources/noAvatar.jpg";
+	public static final String NO_AVATAR = "/Resources/noAvatar.jpg";
 	private ResponseMenu responseMenu;
 	
 	public GamePanel(final DialogueNode dNode) {

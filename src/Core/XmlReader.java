@@ -39,7 +39,6 @@ public class XmlReader {
 			if (isDialogueNode (nNode)) {
 				Element e = (Element) nNode;
 				DialogueNode rootNode = parseDialogueNode (e, 0);
-				Logger.logDebug (rootNode.toString ());
 				RecurseReadChildren (e, rootNode);
 
 				return rootNode;
@@ -63,7 +62,6 @@ public class XmlReader {
 			if (isDialogueNode (nNode)) {
 				Element eTmp = (Element) nNode;
 				DialogueNode dNode = parseDialogueNode (eTmp, parentNode.id);
-				Logger.logDebug (dNode.toString ());
 				parentNode.childrenNodes.add (dNode);
 				RecurseReadChildren (eTmp, dNode);
 			}
