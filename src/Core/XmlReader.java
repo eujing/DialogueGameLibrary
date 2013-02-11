@@ -3,7 +3,6 @@ package Core;
 import Core.ResponseHandler.ResponseType;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.ImageIcon;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

@@ -41,7 +41,7 @@ public class FileIO {
 		return image;
 	}
 	
-	public static void writeImage (ImageIcon img, String fileName, String format) {
+	public static void writeImage (ImageIcon img, File location, String format) {
 		RenderedImage renderedImg = null;
 		
 		if (img.getImage() instanceof RenderedImage) {
@@ -59,7 +59,7 @@ public class FileIO {
 		}
 		
 		try {
-			ImageIO.write(renderedImg, format, new File (fileName));
+			ImageIO.write(renderedImg, format, location);
 		}
 		catch (Exception ex) {
 			Logger.logException("FileIO::writeImage", ex);

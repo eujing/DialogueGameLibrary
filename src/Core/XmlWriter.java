@@ -86,7 +86,7 @@ public class XmlWriter {
 		appendInfo(eNode, doc, "id", "" + node.id);
 		//avatar
 		String path = "./Avatars/" + node.playerName + ".png";
-		FileIO.writeImage (node.avatar, path, "PNG");
+		FileIO.writeImage (node.avatar, new File (path), "PNG");
 		appendInfo(eNode, doc, "avatar", path);
 		//name
 		appendInfo(eNode, doc, "name", node.playerName);
