@@ -3,6 +3,7 @@ package Core;
 import Core.ResponseHandler.ResponseType;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -75,6 +76,7 @@ public class XmlReader {
 		ResponseType type = ResponseType.valueOf (getTagValue ("type", e));
 
 		DialogueNode node = new DialogueNode (id, parentId, name, text, type, this.msgHandler);
+		node.setAvatar(getTagValue ("avatar", e));
 
 		return node;
 	}
