@@ -1,6 +1,5 @@
 package Core;
 
-//import GUI.GamePanel;
 import Core.ResponseHandler.ResponseType;
 import java.io.Serializable;
 import java.util.ArrayList;
